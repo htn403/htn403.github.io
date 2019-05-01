@@ -1,47 +1,204 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-28T13:29:07-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Binh Vu</title><entry><title type="html">From Sketches to HTML/CSS code</title><link href="http://localhost:4000/projects/csci-599/2019/04/27/from-sketches-to-html-css-code.html" rel="alternate" type="text/html" title="From Sketches to HTML/CSS code" /><published>2019-04-27T13:08:19-07:00</published><updated>2019-04-27T13:08:19-07:00</updated><id>http://localhost:4000/projects/csci-599/2019/04/27/from-sketches-to-html-css-code</id><content type="html" xml:base="http://localhost:4000/projects/csci-599/2019/04/27/from-sketches-to-html-css-code.html">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto&quot; src=&quot;/assets/20190427-sketch2code/demo.gif&quot; /&gt;&lt;/p&gt;
-
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-30T18:38:19-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Binh Vu</title><entry><title type="html">From Sketches to HTML/CSS code</title><link href="http://localhost:4000/projects/csci-599/2019/04/27/from-sketches-to-html-css-code.html" rel="alternate" type="text/html" title="From Sketches to HTML/CSS code" /><published>2019-04-27T13:08:19-07:00</published><updated>2019-04-27T13:08:19-07:00</updated><id>http://localhost:4000/projects/csci-599/2019/04/27/from-sketches-to-html-css-code</id><content type="html" xml:base="http://localhost:4000/projects/csci-599/2019/04/27/from-sketches-to-html-css-code.html">&lt;figure&gt;
+	&lt;img src=&quot;/assets/20190427-sketch2code/demo.gif&quot; /&gt;
+	&lt;figcaption&gt;Figure 1. Given the mock-up UI on the left, our system synthesizes HTML/CSS code (middle) that renders the website on the right&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;Creating websites is a difficult task that requires expertise and a significant amount of time. In a typical web development workflow, web developers implement HTML/CSS and Javascript code based on a mock-up UI, which are created using applications such as Sketch. A task of synthesising HTML/CSS programs from mock-up UIs helps speed up the development process by allowing developers to focus more on implementing Javascript logic.&lt;/p&gt;
 
-&lt;p&gt;In this post, we present a system that directly generates HTML/CSS programs from the screenshot image of mock-up UIs. In particular, given a HTML/CSS libraries containing a set of HTML tags &lt;script type=&quot;math/tex&quot;&gt;\mathcal{T}&lt;/script&gt; and CSS classes &lt;script type=&quot;math/tex&quot;&gt;\mathcal{C}&lt;/script&gt;, the system converts a screenshot &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt; of a target mock-up UI into HTML/CSS program &lt;script type=&quot;math/tex&quot;&gt;P&lt;/script&gt; that renders &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt;.
-We have consider two approaches: supervised approach and reinforcement learning approach. However, due to time constraint.&lt;/p&gt;
+&lt;p&gt;In this post, we discuss our approaches to address the above problem, which is formally described as follow. Given a set of HTML tags &lt;script type=&quot;math/tex&quot;&gt;\mathcal{T}&lt;/script&gt;, classes &lt;script type=&quot;math/tex&quot;&gt;\mathcal{C}&lt;/script&gt; of CSS libraries, and a screenshot &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt; of a target mock-up UI, we generate a HTML program &lt;script type=&quot;math/tex&quot;&gt;P&lt;/script&gt; that renders &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt;.&lt;/p&gt;
+
+&lt;p&gt;We experiment with two different approaches: supervised and reinforcement learning (RL). In the reinforcement learning approach, we aim to learn a Deep Q-network to synthesis HTML program without labelled data. Because the problem space in RL is enormous and we have limited resources, we have not successfully made RL to work. The details of our RL approach is described in the Appendix. In the supervised approach, we use CNN to encode the target image &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt; and LSTM to decode the HTML program &lt;script type=&quot;math/tex&quot;&gt;P&lt;/script&gt; from &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt;. In our empirical evaluation, it outperforms the current state-of-the-art (pix2code) significantly by 19.7% (accuracy).&lt;/p&gt;
+
+&lt;p&gt;The most relevant work to this problem is pix2code, which also synthesizes HTML programs from images. Besides the different between neural network architecture, their approach first generates domain specific language (DSL) programs. Then, translate DSL programs to final HTML programs. Using DSL makes this problem easier. However, creating DSL may take lots of time and we may need to create different DSL or different DSL-to-HTML converter for different CSS libraries. By directly generating HTML/CSS program, our approach is easier to adapt to different CSS libraries, and is able to access to a tremendous amount of publicly available training data in open source projects and websites.&lt;/p&gt;
+
+&lt;p&gt;In the remained post, we will described different supervised models and their performances comparing to the current state-of-the-art&lt;/p&gt;
 
 &lt;h1 id=&quot;generating-htmlcss-code-with-neural-guided-search&quot;&gt;Generating HTML/CSS Code with Neural-Guided Search&lt;/h1&gt;
 
-&lt;p&gt;Similar to XML, a HTML program consists of a sequence of HTML tags, each tag can be an open tag or an close tag (e.g., &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;h5&amp;gt;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/h5&amp;gt;&lt;/code&gt;). In addition, open tags may contain other special attributes such as &lt;code class=&quot;highlighter-rouge&quot;&gt;class&lt;/code&gt; to indicate classes they belong to (e.g., &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div class=&quot;row&quot;&amp;gt;&lt;/code&gt;). In our system, we represent a HTML program as a sequence of tokens, each token is either an open tag, an close tag, an open tag and its classes, or one of three special tokens: &lt;code class=&quot;highlighter-rouge&quot;&gt;#text&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;program&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/program&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Similar to XML, a HTML program consists of a sequence of HTML tags, each tag can be an open tag or an close tag (e.g., &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;h5&amp;gt;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/h5&amp;gt;&lt;/code&gt;). In addition, open tags may contain other special attributes such as &lt;code class=&quot;highlighter-rouge&quot;&gt;class&lt;/code&gt; to indicate classes they belong to (e.g., &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div class=&quot;row&quot;&amp;gt;&lt;/code&gt;). In our system, we represent a HTML program as a sequence of tokens, each token is either an open tag, an close tag, an open tag and its classes, or one of three special tokens: &lt;code class=&quot;highlighter-rouge&quot;&gt;#text&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;program&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/program&amp;gt;&lt;/code&gt;. The &lt;code class=&quot;highlighter-rouge&quot;&gt;#text&lt;/code&gt; token acts as a placeholder for text elements in the mock-up UI. &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;program&amp;gt;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/program&amp;gt;&lt;/code&gt; indicate the begining and ending of the HTML program, repsectively.&lt;/p&gt;
 
-&lt;p&gt;Let &lt;script type=&quot;math/tex&quot;&gt;f&lt;/script&gt; is a function that predict probabilities of the next tokens &lt;script type=&quot;math/tex&quot;&gt;x_{t+1}&lt;/script&gt; of the program given a current sequence of tokens $X_t$ and a target image &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt;. Then, the desired program &lt;script type=&quot;math/tex&quot;&gt;P&lt;/script&gt; can be generated by repeated applying &lt;script type=&quot;math/tex&quot;&gt;f&lt;/script&gt; to generate one token by one token, and invoke the rendering program to evaluate the current program until we find the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/program&amp;gt;&lt;/code&gt; token that indicates the end of the program.&lt;/p&gt;
+&lt;p&gt;Let &lt;script type=&quot;math/tex&quot;&gt;f&lt;/script&gt; is a function that predict probabilities of the next tokens &lt;script type=&quot;math/tex&quot;&gt;x_{t+1}&lt;/script&gt; of the program given a current sequence of tokens &lt;script type=&quot;math/tex&quot;&gt;X_t&lt;/script&gt; and a target image &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt;. Then, the desired program &lt;script type=&quot;math/tex&quot;&gt;P&lt;/script&gt; can be generated by repeatedly applying &lt;script type=&quot;math/tex&quot;&gt;f&lt;/script&gt; in the beam search algorithm to generate one token by one token, and optionally invoke a web rendering program to evaluate and prune search branches until we find the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/program&amp;gt;&lt;/code&gt; token.&lt;/p&gt;
 
-&lt;p&gt;To estimate &lt;script type=&quot;math/tex&quot;&gt;f&lt;/script&gt;, we train a deep learning model that uses CNN to encode a target image to a representation vector &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt;, then feeds &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; with current tokens &lt;script type=&quot;math/tex&quot;&gt;X_t&lt;/script&gt; of the program to an LSTM to decode the next token &lt;script type=&quot;math/tex&quot;&gt;x_{t+1}&lt;/script&gt;. We have tried three variants of combination &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;X_t&lt;/script&gt; as below:&lt;/p&gt;
+&lt;p&gt;To estimate &lt;script type=&quot;math/tex&quot;&gt;f&lt;/script&gt;, we train a deep learning model that uses CNN to learn a representation vector &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; of a target image, then inputs &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; with current tokens &lt;script type=&quot;math/tex&quot;&gt;X_t&lt;/script&gt; of the program to an LSTM to predict the next token &lt;script type=&quot;math/tex&quot;&gt;x_{t+1}&lt;/script&gt;. We experiment with three different architectures, each have different ways of usages of &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;X_t&lt;/script&gt;, as follow:&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Use &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; as hidden state&lt;/li&gt;
-  &lt;li&gt;Concatenate &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; with each &lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
-x_{t' &lt; t} \in X_t %]]&gt;&lt;/script&gt;&lt;/li&gt;
-  &lt;li&gt;Attention model&lt;/li&gt;
-&lt;/ol&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Using &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; as the initial hidden state of LSTM&lt;/strong&gt;: the architecture of this model (ED-1) is showed in the figure below. It contains of three CNN layers extracting features from a image, then passes to a fully connected layer to extract a representation vector &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; of size 512. &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; is used as the hidden state of a one-layer LSTM (hidden states are vectors of &lt;script type=&quot;math/tex&quot;&gt;R^{512}&lt;/script&gt;). LSTM is trained to predict next tokens of target HTML programs.&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h1 id=&quot;related-work&quot;&gt;Related Work&lt;/h1&gt;
+&lt;figure&gt;
+	&lt;img src=&quot;/assets/20190427-sketch2code/model-ed-1.png&quot; /&gt;
+	&lt;figcaption&gt;Figure 2. Network architecture of model ED-1&lt;/figcaption&gt;
+&lt;/figure&gt;
 
-&lt;p&gt;Pix2code&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Concatenating &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; with each &lt;script type=&quot;math/tex&quot;&gt;x_{t' \le t} \in X_t&lt;/script&gt;&lt;/strong&gt;: the architecture of this model (ED-2) is similar to the above model (figure below). However, instead of using &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; as initial hidden state, &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; is concatenate with vectors of tokens &lt;script type=&quot;math/tex&quot;&gt;X_t&lt;/script&gt; and is inputed to the LSTM.&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h1 id=&quot;empirical-evaluating&quot;&gt;Empirical Evaluating&lt;/h1&gt;
+&lt;figure&gt;
+	&lt;img src=&quot;/assets/20190427-sketch2code/model-ed-2.png&quot; /&gt;
+	&lt;figcaption&gt;Figure 3. Network architecture of model ED-2&lt;/figcaption&gt;
+&lt;/figure&gt;
 
-&lt;p&gt;We are evaluting&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; is computed dynamically at each time step &lt;script type=&quot;math/tex&quot;&gt;t&lt;/script&gt; using an attention layer, and is concatenated with the input token &lt;script type=&quot;math/tex&quot;&gt;x_{t'}&lt;/script&gt; to predict next token &lt;script type=&quot;math/tex&quot;&gt;x_{t'+1}&lt;/script&gt;&lt;/strong&gt;: the architecture of this model (ED-3) is similar to the above model. However, instead of calculating representation vectors &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; using a fully connected layer, we compute &lt;script type=&quot;math/tex&quot;&gt;z&lt;/script&gt; at time step &lt;script type=&quot;math/tex&quot;&gt;t'&lt;/script&gt; based on the hidden state &lt;script type=&quot;math/tex&quot;&gt;h_{t'}&lt;/script&gt; and the extracted features vector &lt;script type=&quot;math/tex&quot;&gt;\alpha&lt;/script&gt; using soft attention mechanism as in Xu et al. [2].&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h1 id=&quot;discussion-and-future-work&quot;&gt;Discussion and Future work&lt;/h1&gt;
+&lt;figure&gt;
+	&lt;img src=&quot;/assets/20190427-sketch2code/model-ed-3.png&quot; /&gt;
+	&lt;figcaption&gt;Figure 4. Network architecture of model ED-3&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h1 id=&quot;experimental-evaluation&quot;&gt;Experimental Evaluation&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Dataset and evaluation metric&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We evaluate our approach on the synthesized web dataset from pix2code [1]. The details of the dataset is described in the table below. Note that we converted the programs in the original dataset, which written in DSL to HTML code. Because of that, the average length of the new programs is almost twice longer than the average length of the original programs.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Datasets&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;training&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;validation&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;testing&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;average length of programs&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;pix2code&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1250&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;250.&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;250.&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;105&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;We assess the quality of predicted programs by comparing with gold programs in term of accuracies as in pix2code [1].&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\text{accuracy(gp, pp)} = \frac{\sum_{i=0}^{min(|\text{gp}|, |\text{pp}|)} \text{gp}[i] = \text{pp}[i]}{max(|\text{gp}|, |\text{pp}|)}&lt;/script&gt;
+
+&lt;p&gt;where &lt;script type=&quot;math/tex&quot;&gt;\text{gp}&lt;/script&gt; and &lt;script type=&quot;math/tex&quot;&gt;\text{pp}&lt;/script&gt; are the predicted program and gold program, respectively, and &lt;script type=&quot;math/tex&quot;&gt;\text{gp}[i]&lt;/script&gt; is a token at position &lt;script type=&quot;math/tex&quot;&gt;i&lt;/script&gt; of the program.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Training supervised models&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The three models (ED-1, ED-2, ED-3) are trained using ADAM-AMSGRAD optimization method for 100 epoches with learning rate 5e-4. The training task is to minimize the cross entropy loss of predicting next tokens of a program given the current tokens and a target image. We report the average loss and the average classification accuracy for predicted tokens in figures below.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;img style=&quot;width: 90%&quot; src=&quot;/assets/20190427-sketch2code/training-stats.png&quot; /&gt;
+	&lt;figcaption&gt;Figure 5. Training losses and classification accuracy per epoch&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;figure&gt;
+	&lt;img style=&quot;width: 90%&quot; src=&quot;/assets/20190427-sketch2code/validation-stats.png&quot; /&gt;
+	&lt;figcaption&gt;Figure 6. Validation losses and classification accuracy per epoch&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;figure&gt;
+	&lt;img style=&quot;width: 90%&quot; src=&quot;/assets/20190427-sketch2code/testing-stats.png&quot; /&gt;
+	&lt;figcaption&gt;Figure 7. Testing losses and classification accuracy every 5 epoches&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Automatic synthesizing HTML programs&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Datasets&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;pix2code&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;ED-1&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;ED-2&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;ED-3&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;pix2code&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0.794&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0.722&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0.982&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;0.991&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The above table reports the accuracy of predicted programs of the baseline method (pix2code) and the three proposed models when using beam search with beam width of 3. Note that to evaluate pix2code, the output of pix2code is post processed to convert from DSL to HTML. In addition, as pix2code only uses beam search without evaluating predicted programs, our methods also generates HTML programs using the same setting. The model that has the highest accuracy is ED-3, which uses attention mechanism. ED-3 outperforms pix2code significantly by 19.7%. Model ED-1 has the lowest accuracy (72.2%) despite of having high test classification accuracy (95%). The reason is that the effect of the input image is faded away when the program is getting longer and it is hard for the network to remember the image in the initial hidden state. Furthermore, as the average length of programs is very long (105 tokens), a minor change in a predicted token may leads to a final diverse program.&lt;/p&gt;
+
+&lt;p&gt;To further understand the results of the ED-3 model. We visualize the attention map to understand what information in the image &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt; the model is used to make the prediction in the Figure 8 below. The model is able to focus on correct location, which is important to predict a next token.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;img style=&quot;width: 90%&quot; src=&quot;/assets/20190427-sketch2code/attention.png&quot; /&gt;
+	&lt;figcaption&gt;Figure 8. Attention maps when predicting &lt;code&gt;#text&lt;/code&gt; token (left image) and &lt;code&gt;&amp;lt;button...&amp;gt;&lt;/code&gt; token (right image). &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;We also visualize the activation of different CNN layers to understand what features they can extracted. In Figure 9 is the activation of the first layer. In these activations, different filters are responsive to different components in a page such as buttons, text or headers.&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;img style=&quot;width: 70%&quot; src=&quot;/assets/20190427-sketch2code/layer1-activation.png&quot; /&gt;
+	&lt;figcaption&gt;Figure 9. Activation of the first layer.&lt;/figcaption&gt;
+&lt;/figure&gt;
 
 &lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Beltramelli, Tony. “Pix2code: Generating Code from a Graphical User Interface Screenshot.” Proceedings of the ACM SIGCHI Symposium on Engineering Interactive Computing Systems, 2018, p. 3.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Xu, Kelvin, Jimmy Ba, Ryan Kiros, Kyunghyun Cho, Aaron Courville, Ruslan Salakhudinov, Rich Zemel, and Yoshua Bengio. “Show, attend and tell: Neural image caption generation with visual attention.” In International conference on machine learning, pp. 2048-2057. 2015.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h1 id=&quot;appendix&quot;&gt;Appendix&lt;/h1&gt;
 
 &lt;h4 id=&quot;reinforcement-learning-approach&quot;&gt;Reinforcement Learning Approach&lt;/h4&gt;
 
+&lt;p&gt;&lt;strong&gt;Problem formulation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The problem of synthesizing HTML programs from GUI images can be formulated to RL as follows. The environment&lt;/p&gt;
+
+&lt;p&gt;the state is a pair of a target GUI image and our current program. Possible actions are creating a new HTML tag, adding new CSS class to the current tag, and closing a HTML tag. The reward of a state is calculated by how similar it is between its desired GUI image, and the current webpage, which rendered from its current program.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reward and training&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;img style=&quot;width: 70%&quot; src=&quot;/assets/20190427-sketch2code/reward.png&quot; /&gt;
+	&lt;figcaption&gt;Figure 10. Testing losses and classification accuracy per epoch&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Preliminary results&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;img src=&quot;/assets/20190427-sketch2code/reinforcement-learning-stats.png&quot; /&gt;
+	&lt;figcaption&gt;Figure 11. Testing losses and classification accuracy per epoch&lt;/figcaption&gt;
+&lt;/figure&gt;
+
 &lt;style&gt;
 	.post-content {
 		text-align: justify;
 	}
+	/* make math/tex inline for figure caption */
+	figcaption &gt; span {
+		display: inline-block !important;
+		margin: 0 !important;
+	}
+	figcaption &gt; code {
+		font-size: inherit !important;
+	}
+	figure &gt; img {
+		display: block; 
+		margin-left: auto; 
+		margin-right: auto;
+	}
+	figcaption {
+		text-align: center;
+		font-style: italic;
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+	}
 &lt;/style&gt;
 
-&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;&lt;/script&gt;</content><author><name></name></author><summary type="html"></summary></entry></feed>
+&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;&lt;/script&gt;</content><author><name></name></author><summary type="html">Figure 1. Given the mock-up UI on the left, our system synthesizes HTML/CSS code (middle) that renders the website on the right Introduction</summary></entry></feed>
