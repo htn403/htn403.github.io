@@ -15,7 +15,7 @@ Creating websites is a difficult task that requires expertise and a significant 
 
 In this post, we discuss our approaches to address the above problem, which is formally described as follows. Given a set of HTML tags $$\mathcal{T}$$, classes $$\mathcal{C}$$ of CSS libraries, and a screenshot $$I$$ of a target mock-up UI, we generate a HTML program $$P$$ that renders $$I$$. 
 
-We experiment with two different approaches: supervised and reinforcement learning (RL). In the reinforcement learning approach, we aim to learn a Deep Q-network to synthesis HTML program without labelled data. Because the problem space in RL is enormous and we have limited resources, we have not successfully made RL work. The details of our RL approach is described in the Appendix. In the supervised approach, we use CNN to encode the target image $$I$$ and LSTM to decode the HTML program $$P$$ from $$I$$. In our empirical evaluation, it outperforms the current state-of-the-art (pix2code) significantly by 19.7% (accuracy).
+We experiment with two different approaches: supervised and reinforcement learning (RL). In the reinforcement learning approach, we aim to learn a Deep Q-network to synthesis HTML program without labelled data. Because the problem space in RL is enormous and we have limited resources, we have not successfully made RL work. The details of our RL approach is described in the Appendix. In the supervised approach, we use CNN to encode the target image $$I$$ and LSTM to decode the HTML program $$P$$ from $$I$$. In our empirical evaluation, it outperforms the current state-of-the-art (pix2code) significantly by 19.7% in term of accuracy.
 
 The most relevant work to this problem is pix2code [1], which also synthesizes HTML programs from images. Besides the difference between neural network architectures, their approach first generates domain specific language (DSL) programs and then, translate DSL programs to final HTML programs. Using DSL makes this problem easier because the lengths of programs are smaller. However, creating DSL may take lots of time, and we may need to develop different DSLs or DSL-to-HTML converters for different CSS libraries. By directly generating HTML/CSS program, our approach is more natural to adapt to various CSS libraries and can access a tremendous amount of publicly available training data in open source projects and websites.
 
@@ -43,7 +43,7 @@ To estimate $$f$$, we train a deep learning model that uses CNN to learn a repre
 	<figcaption>Figure 3. Network architecture of model ED-2</figcaption>
 </figure>
 
-* **$$z$$ is computed dynamically at each time step $$t$$ using an attention layer, and is concatenated with the input token $$x_{t'}$$ to predict next token $$x_{t'+1}$$**: the architecture of this model (ED-3) is similar to the above model. However, instead of calculating representation vectors $$z$$ using a fully connected layer, we compute $$z$$ at time step $$t'$$ based on the hidden state $$h_{t'}$$ and the extracted features vector $$\alpha$$ using soft attention mechanism as in Xu et al. [2].
+* **$$z$$ is computed dynamically at each time step $$t$$ using an attention layer, and is concatenated with the input token $$x_{t'}$$ to predict next token $$x_{t'+1}$$**: the architecture of this model (ED-3) is similar to ED-2. However, instead of calculating representation vectors $$z$$ using a fully connected layer, we compute $$z$$ at time step $$t'$$ based on the hidden state $$h_{t'}$$ and the extracted features vector $$\alpha$$ using soft attention mechanism as in Xu et al. [2].
 
 <figure>
 	<img src="/assets/20190427-sketch2code/model-ed-3.png" />
@@ -107,6 +107,13 @@ We also visualize the activation of different CNN layers to understand which fea
 	<figcaption>Figure 9. Activation of the first layer.</figcaption>
 </figure>
 
+# Conclusion and Future Work
+
+In this blog post, we have discussed how to synthesis HTML programs from screenshots of mock-up UIs using CNN-LSTM with the soft attention mechanism. The evaluation shows that our approach outperforms the current state-of-the-art by 19.7%.
+
+One future direction of this work is to exploit available training data of websites on the Web. Also, generating an HTML program from a whole mock-up UI at once may be costly and inefficient as the program can get very long. To address this issue, we can partition the mock-up UI to different components, generates each HTML program for each component and combines to get back the final UI.
+
+Another direction for future work is to integrate our system as a part of a pipeline that generates HTML program from hand-drawn images. In particular, we first reconstruct the mock-up UI from the hand-drawn image, then apply the system to synthesize the HTML program.
 
 # References
 

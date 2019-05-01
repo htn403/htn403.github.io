@@ -55,7 +55,7 @@
 
 <p>In this post, we discuss our approaches to address the above problem, which is formally described as follows. Given a set of HTML tags <script type="math/tex">\mathcal{T}</script>, classes <script type="math/tex">\mathcal{C}</script> of CSS libraries, and a screenshot <script type="math/tex">I</script> of a target mock-up UI, we generate a HTML program <script type="math/tex">P</script> that renders <script type="math/tex">I</script>.</p>
 
-<p>We experiment with two different approaches: supervised and reinforcement learning (RL). In the reinforcement learning approach, we aim to learn a Deep Q-network to synthesis HTML program without labelled data. Because the problem space in RL is enormous and we have limited resources, we have not successfully made RL work. The details of our RL approach is described in the Appendix. In the supervised approach, we use CNN to encode the target image <script type="math/tex">I</script> and LSTM to decode the HTML program <script type="math/tex">P</script> from <script type="math/tex">I</script>. In our empirical evaluation, it outperforms the current state-of-the-art (pix2code) significantly by 19.7% (accuracy).</p>
+<p>We experiment with two different approaches: supervised and reinforcement learning (RL). In the reinforcement learning approach, we aim to learn a Deep Q-network to synthesis HTML program without labelled data. Because the problem space in RL is enormous and we have limited resources, we have not successfully made RL work. The details of our RL approach is described in the Appendix. In the supervised approach, we use CNN to encode the target image <script type="math/tex">I</script> and LSTM to decode the HTML program <script type="math/tex">P</script> from <script type="math/tex">I</script>. In our empirical evaluation, it outperforms the current state-of-the-art (pix2code) significantly by 19.7% in term of accuracy.</p>
 
 <p>The most relevant work to this problem is pix2code [1], which also synthesizes HTML programs from images. Besides the difference between neural network architectures, their approach first generates domain specific language (DSL) programs and then, translate DSL programs to final HTML programs. Using DSL makes this problem easier because the lengths of programs are smaller. However, creating DSL may take lots of time, and we may need to develop different DSLs or DSL-to-HTML converters for different CSS libraries. By directly generating HTML/CSS program, our approach is more natural to adapt to various CSS libraries and can access a tremendous amount of publicly available training data in open source projects and websites.</p>
 
@@ -88,7 +88,7 @@
 </figure>
 
 <ul>
-  <li><strong><script type="math/tex">z</script> is computed dynamically at each time step <script type="math/tex">t</script> using an attention layer, and is concatenated with the input token <script type="math/tex">x_{t'}</script> to predict next token <script type="math/tex">x_{t'+1}</script></strong>: the architecture of this model (ED-3) is similar to the above model. However, instead of calculating representation vectors <script type="math/tex">z</script> using a fully connected layer, we compute <script type="math/tex">z</script> at time step <script type="math/tex">t'</script> based on the hidden state <script type="math/tex">h_{t'}</script> and the extracted features vector <script type="math/tex">\alpha</script> using soft attention mechanism as in Xu et al. [2].</li>
+  <li><strong><script type="math/tex">z</script> is computed dynamically at each time step <script type="math/tex">t</script> using an attention layer, and is concatenated with the input token <script type="math/tex">x_{t'}</script> to predict next token <script type="math/tex">x_{t'+1}</script></strong>: the architecture of this model (ED-3) is similar to ED-2. However, instead of calculating representation vectors <script type="math/tex">z</script> using a fully connected layer, we compute <script type="math/tex">z</script> at time step <script type="math/tex">t'</script> based on the hidden state <script type="math/tex">h_{t'}</script> and the extracted features vector <script type="math/tex">\alpha</script> using soft attention mechanism as in Xu et al. [2].</li>
 </ul>
 
 <figure>
@@ -186,6 +186,14 @@
 	<img style="width: 70%" src="/assets/20190427-sketch2code/layer1-activation.png" />
 	<figcaption>Figure 9. Activation of the first layer.</figcaption>
 </figure>
+
+<h1 id="conclusion-and-future-work">Conclusion and Future Work</h1>
+
+<p>In this blog post, we have discussed how to synthesis HTML programs from screenshots of mock-up UIs using CNN-LSTM with the soft attention mechanism. The evaluation shows that our approach outperforms the current state-of-the-art by 19.7%.</p>
+
+<p>One future direction of this work is to exploit available training data of websites on the Web. Also, generating an HTML program from a whole mock-up UI at once may be costly and inefficient as the program can get very long. To address this issue, we can partition the mock-up UI to different components, generates each HTML program for each component and combines to get back the final UI.</p>
+
+<p>Another direction for future work is to integrate our system as a part of a pipeline that generates HTML program from hand-drawn images. In particular, we first reconstruct the mock-up UI from the hand-drawn image, then apply the system to synthesize the HTML program.</p>
 
 <h1 id="references">References</h1>
 
