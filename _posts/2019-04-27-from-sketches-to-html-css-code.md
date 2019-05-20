@@ -7,7 +7,7 @@ categories: projects csci-599
 
 <figure>
 	<img src="/assets/20190427-sketch2code/demo.gif" />
-	<figcaption>Figure 1. Given the mock-up UI on the left, our system synthesizes HTML/CSS code (middle) that renders the website on the right</figcaption>
+	<figcaption>Figure 1. Given the mock-up UI on the left, our system synthesizes HTML/CSS code (middle) that renders the website on the right. Code is [here](https://github.com/binh-vu/sketch2code)</figcaption>
 </figure>
 # Introduction
 
