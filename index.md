@@ -3,10 +3,10 @@ layout: default-container
 ---
 
 <div class="row mb-3">
-  <div class="col-sm-3">
+  <div class="col-md-3">
     <img src="/assets/homepage/profile.jpg" class="rounded float-left img-fluid" style="border: #ddd solid 1px" />
   </div>
-  <div class="col-sm">
+  <div class="col-md">
     <p>
         <b>Ph.D. student</b> <br/>
         Office ISI 1038 <br />
@@ -46,14 +46,14 @@ I am generally interested in machine learning, mainly focusing on techniques for
 {% for project in site.data.projects %}
 <div class="card mb-3">
   <div class="row no-gutters">
-    <div class="col-md-4 d-flex">
+    <div class="col-sm-4 align-self-center">
         {% if project.image %}
-        <img src="{{ project.image }}" class="card-img" style="height:auto">
+        <img src="{{ project.image }}" class="card-img">
         {% else %}
         <!-- <svg class="bd-placeholder-img" width="100%" height="100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dx="-2em" dy=".3em">No Image</text></svg> -->
         {% endif %}
     </div>
-    <div class="col-md-8">
+    <div class="col-sm-8">
       <div class="card-body">
         <h5 class="card-title">{{ project.name }}</h5>
         <p class="card-text">

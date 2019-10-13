@@ -11,7 +11,7 @@
 - name: Learning Semantic Models of Data Sources Using Probabilistic Graphical Models
   image: /assets/homepage/projects/sm-www19.png
   descriptions:
-    - The problem is to automatically building semantic descriptions of data for publishing structured sources to knowledge graphs.
+    - The problem is to automatically build semantic descriptions of data for publishing structured sources to knowledge graphs.
     - We use beam search to generate possible candidate semantic models and a probabilistic graphical model as a scoring function to guide the search.
   links:
   - name: Paper
