@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2019-04-30T23:09:52-07:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Binh Vu</title><entry><title type="html">From Sketches to HTML/CSS code</title><link href="http://0.0.0.0:4000/projects/csci-599/2019/04/27/from-sketches-to-html-css-code.html" rel="alternate" type="text/html" title="From Sketches to HTML/CSS code" /><published>2019-04-27T13:08:19-07:00</published><updated>2019-04-27T13:08:19-07:00</updated><id>http://0.0.0.0:4000/projects/csci-599/2019/04/27/from-sketches-to-html-css-code</id><content type="html" xml:base="http://0.0.0.0:4000/projects/csci-599/2019/04/27/from-sketches-to-html-css-code.html">&lt;figure&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2019-10-13T12:55:01-07:00</updated><id>/feed.xml</id><title type="html">Binh Vu</title><entry><title type="html">From Sketches to HTML/CSS code</title><link href="/projects/csci-599/2019/04/27/from-sketches-to-html-css-code.html" rel="alternate" type="text/html" title="From Sketches to HTML/CSS code" /><published>2019-04-27T13:08:19-07:00</published><updated>2019-04-27T13:08:19-07:00</updated><id>/projects/csci-599/2019/04/27/from-sketches-to-html-css-code</id><content type="html" xml:base="/projects/csci-599/2019/04/27/from-sketches-to-html-css-code.html">&lt;figure&gt;
 	&lt;img src=&quot;/assets/20190427-sketch2code/demo.gif&quot; /&gt;
-	&lt;figcaption&gt;Figure 1. Given the mock-up UI on the left, our system synthesizes HTML/CSS code (middle) that renders the website on the right&lt;/figcaption&gt;
+	&lt;figcaption&gt;Figure 1. Given the mock-up UI on the left, our system synthesizes HTML/CSS code (middle) that renders the website on the right. Code is &lt;a href=&quot;https://github.com/binh-vu/sketch2code&quot;&gt;here&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
@@ -27,7 +27,7 @@
 &lt;/ul&gt;
 
 &lt;figure&gt;
-	&lt;img src=&quot;/assets/20190427-sketch2code/model-ed-1.png&quot; /&gt;
+	&lt;img style=&quot;width: 90%&quot; src=&quot;/assets/20190427-sketch2code/model-ed-1.png&quot; /&gt;
 	&lt;figcaption&gt;Figure 2. Network architecture of model ED-1&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -36,7 +36,7 @@
 &lt;/ul&gt;
 
 &lt;figure&gt;
-	&lt;img src=&quot;/assets/20190427-sketch2code/model-ed-2.png&quot; /&gt;
+	&lt;img style=&quot;width: 90%&quot; src=&quot;/assets/20190427-sketch2code/model-ed-2.png&quot; /&gt;
 	&lt;figcaption&gt;Figure 3. Network architecture of model ED-2&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -45,7 +45,7 @@
 &lt;/ul&gt;
 
 &lt;figure&gt;
-	&lt;img src=&quot;/assets/20190427-sketch2code/model-ed-3.png&quot; /&gt;
+	&lt;img style=&quot;width: 90%&quot; src=&quot;/assets/20190427-sketch2code/model-ed-3.png&quot; /&gt;
 	&lt;figcaption&gt;Figure 4. Network architecture of model ED-3&lt;/figcaption&gt;
 &lt;/figure&gt;
 
@@ -126,11 +126,11 @@
 
 &lt;p&gt;The above table reports the accuracy of predicted programs of the baseline method (pix2code) and the three proposed models when using beam search with a beam width of 3. Note that to evaluate pix2code, the output of pix2code is post-processed to convert from DSL to HTML. In addition, as pix2code only uses beam search without evaluating predicted programs, our methods also generate HTML programs using the same setting. The model with the highest accuracy is ED-3, which uses the attention mechanism. It outperforms pix2code significantly by 19.7%. Model ED-1 has the lowest accuracy (72.2%) despite having high test classification accuracy (95%). The reason is that the effect of the input image is faded away when the program is getting longer, and it is hard for the network to remember the image in the initial hidden state. Furthermore, as the average length of programs is very long (105 tokens), a minor change in a predicted token may lead to a final diverse program.&lt;/p&gt;
 
-&lt;p&gt;To further understand the results of the ED-3 model. We visualize the attention map to understand what information in the image &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt; the model is used to make the prediction in Figure 8 below. The model can focus on correct locations, which are vital to predict the next token.&lt;/p&gt;
+&lt;p&gt;To further understand the results of the ED-3 model. We visualize the attention map to understand what information in the image &lt;script type=&quot;math/tex&quot;&gt;I&lt;/script&gt; the model is used to make the prediction in Figure 8 below. In many cases, the model can focus on nearby locations, which are vital to predict the next token.&lt;/p&gt;
 
 &lt;figure&gt;
 	&lt;img style=&quot;width: 90%&quot; src=&quot;/assets/20190427-sketch2code/attention.png&quot; /&gt;
-	&lt;figcaption&gt;Figure 8. On the left is the attention map when predicting &lt;code&gt;#text&lt;/code&gt; token. The model is able to focus to the exact position in which the text belongs to. The image on the right shows attention map when predicting &lt;code&gt;&amp;lt;button...&amp;gt;&lt;/code&gt; token. The model focuses (with low confidence) both on the green button (correct location) and the next red button (incorrect location).&lt;/figcaption&gt;
+	&lt;figcaption&gt;Figure 8. On the left is the attention map when predicting &lt;code&gt;#text&lt;/code&gt; token. The model is able to focus to the nearby position in which the text belongs to. The image on the right shows attention map when predicting &lt;code&gt;&amp;lt;button...&amp;gt;&lt;/code&gt; token. The model focuses (with low confidence) both on the green button (correct location) and the next red button (incorrect location).&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;We also visualize the activation of different CNN layers to understand which features they can extract. Figure 9 is the activation of the first layer. In these activations, different filters are responsive to different components in a page such as buttons, text or headers.&lt;/p&gt;
@@ -211,4 +211,4 @@
 	}
 &lt;/style&gt;
 
-&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;&lt;/script&gt;</content><author><name></name></author><summary type="html">Figure 1. Given the mock-up UI on the left, our system synthesizes HTML/CSS code (middle) that renders the website on the right Introduction</summary></entry></feed>
+&lt;script type=&quot;text/javascript&quot; async=&quot;&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;&lt;/script&gt;</content><author><name></name></author><summary type="html">Figure 1. Given the mock-up UI on the left, our system synthesizes HTML/CSS code (middle) that renders the website on the right. Code is here Introduction</summary></entry></feed>

@@ -13,7 +13,7 @@ categories: projects csci-599
 
 Creating websites is a difficult task that requires expertise and a significant amount of time. In a typical web development workflow, web developers implement HTML/CSS and Javascript code based on a mock-up UI, which are created using applications such as [Sketch](https://sketch.com). A task of synthesising HTML/CSS programs from mock-up UIs helps speed up the development process by allowing developers to focus more on implementing Javascript logic. 
 
-In this post, we discuss our approaches to address the above problem, which is formally described as follows. Given a set of HTML tags $$\mathcal{T}$$, classes $$\mathcal{C}$$ of CSS libraries, and a screenshot $$I$$ of a target mock-up UI, we generate a HTML program $$P$$ that renders $$I$$. 
+In this post, we discuss our approaches to address the above problem, which is formally described as follows. Given a set of HTML tags $$\mathcal{T}$$, classes $$\mathcal{C}$$ of CSS libraries, and a screenshot $$I$$ of a target mock-up UI, we generate a HTML program $$P$$ that renders $$I$$.
 
 We experiment with two different approaches: supervised and reinforcement learning (RL). In the reinforcement learning approach, we aim to learn a Deep Q-network to synthesis HTML program without labelled data. Because the problem space in RL is enormous and we have limited resources, we have not successfully made RL work. The details of our RL approach is described in the Appendix. In the supervised approach, we use CNN to encode the target image $$I$$ and LSTM to decode the HTML program $$P$$ from $$I$$. In our empirical evaluation, it outperforms the current state-of-the-art (pix2code) significantly by 19.7% in term of accuracy.
 
@@ -32,21 +32,21 @@ To estimate $$f$$, we train a deep learning model that uses CNN to learn a repre
 * **Using $$z$$ as the initial hidden state of LSTM**: the architecture of this model (ED-1) is showed in the following figure. It contains three CNN layers extracting features from an image, then passes through a fully connected layer to extract a representation vector $$z$$ of size 512. $$z$$ is used as the hidden state of a one-layer LSTM (the hidden states are vectors of $$R^{512}$$). LSTM is trained to predict the next tokens of target HTML programs.
 
 <figure>
-	<img src="/assets/20190427-sketch2code/model-ed-1.png" />
+	<img style="width: 90%" src="/assets/20190427-sketch2code/model-ed-1.png" />
 	<figcaption>Figure 2. Network architecture of model ED-1</figcaption>
 </figure>
 
 * **Concatenating $$z$$ with each $$x_{t' \le t} \in X_t$$**: the architecture of this model (ED-2) is similar to the above model (figure below). However, instead of using $$z$$ as the initial hidden state, $$z$$ is concatenate with vectors of tokens $$X_t$$ and is inputted to the LSTM.
 
 <figure>
-	<img src="/assets/20190427-sketch2code/model-ed-2.png" />
+	<img style="width: 90%" src="/assets/20190427-sketch2code/model-ed-2.png" />
 	<figcaption>Figure 3. Network architecture of model ED-2</figcaption>
 </figure>
 
 * **$$z$$ is computed dynamically at each time step $$t$$ using an attention layer, and is concatenated with the input token $$x_{t'}$$ to predict next token $$x_{t'+1}$$**: the architecture of this model (ED-3) is similar to ED-2. However, instead of calculating representation vectors $$z$$ using a fully connected layer, we compute $$z$$ at time step $$t'$$ based on the hidden state $$h_{t'}$$ and the extracted features vector $$\alpha$$ using soft attention mechanism as in Xu et al. [2].
 
 <figure>
-	<img src="/assets/20190427-sketch2code/model-ed-3.png" />
+	<img style="width: 90%" src="/assets/20190427-sketch2code/model-ed-3.png" />
 	<figcaption>Figure 4. Network architecture of model ED-3</figcaption>
 </figure>
 
@@ -93,11 +93,11 @@ The three models (ED-1, ED-2, ED-3) are trained using ADAM-AMSGRAD optimization 
 
 The above table reports the accuracy of predicted programs of the baseline method (pix2code) and the three proposed models when using beam search with a beam width of 3. Note that to evaluate pix2code, the output of pix2code is post-processed to convert from DSL to HTML. In addition, as pix2code only uses beam search without evaluating predicted programs, our methods also generate HTML programs using the same setting. The model with the highest accuracy is ED-3, which uses the attention mechanism. It outperforms pix2code significantly by 19.7%. Model ED-1 has the lowest accuracy (72.2%) despite having high test classification accuracy (95%). The reason is that the effect of the input image is faded away when the program is getting longer, and it is hard for the network to remember the image in the initial hidden state. Furthermore, as the average length of programs is very long (105 tokens), a minor change in a predicted token may lead to a final diverse program.
 
-To further understand the results of the ED-3 model. We visualize the attention map to understand what information in the image $$I$$ the model is used to make the prediction in Figure 8 below. The model can focus on correct locations, which are vital to predict the next token.
+To further understand the results of the ED-3 model. We visualize the attention map to understand what information in the image $$I$$ the model is used to make the prediction in Figure 8 below. In many cases, the model can focus on nearby locations, which are vital to predict the next token.
 
 <figure>
 	<img style="width: 90%" src="/assets/20190427-sketch2code/attention.png" />
-	<figcaption>Figure 8. On the left is the attention map when predicting <code>#text</code> token. The model is able to focus to the exact position in which the text belongs to. The image on the right shows attention map when predicting <code>&lt;button...&gt;</code> token. The model focuses (with low confidence) both on the green button (correct location) and the next red button (incorrect location).</figcaption>
+	<figcaption>Figure 8. On the left is the attention map when predicting <code>#text</code> token. The model is able to focus to the nearby position in which the text belongs to. The image on the right shows attention map when predicting <code>&lt;button...&gt;</code> token. The model focuses (with low confidence) both on the green button (correct location) and the next red button (incorrect location).</figcaption>
 </figure>
 
 We also visualize the activation of different CNN layers to understand which features they can extract. Figure 9 is the activation of the first layer. In these activations, different filters are responsive to different components in a page such as buttons, text or headers.
