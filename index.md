@@ -25,9 +25,9 @@ Marina del Rey, CA, 90292 <br/>
 
 ### Biography
 
-I am a Ph.D. student in Computer Science at [University of Southern California](https://usc.edu) (USC), advised by Prof. [Craig Knoblock](http://usc-isi-i2.github.io/knoblock/). Before joining USC in 2016, I earned my B.E. in Computer Science from HCMC University of Technology in 2015.
+I am a Ph.D. student in Computer Science at [University of Southern California](https://usc.edu) (USC), advised by Prof. [Craig Knoblock](http://usc-isi-i2.github.io/knoblock/). Before joining USC in 2016, I earned my B.E. in Computer Science from [HCMC University of Technology](http://www.cse.hcmut.edu.vn/site/en/) (honor program) in 2015.
 
-I am generally interested in machine learning, mainly focusing on techniques for knowledge graph construction. My current research is about semantic modeling: building semantic descriptions of data for automatically publishing structured sources to knowledge graphs. More information is available on my [resume](/assets/resume.pdf).
+I am generally interested in machine learning, mainly focusing on techniques for knowledge graph construction. My current research is about semantic modeling for automatically publishing structured data sources to knowledge graphs. More information is available on my [resumé](/assets/resume.pdf).
 
 ### Projects
 
@@ -46,9 +46,9 @@ I am generally interested in machine learning, mainly focusing on techniques for
 {% for project in site.data.projects %}
 <div class="card mb-3">
   <div class="row no-gutters">
-    <div class="col-md-4 d-flex align-self-center">
+    <div class="col-md-4 d-flex">
         {% if project.image %}
-        <img src="{{ project.image }}" class="card-img">
+        <img src="{{ project.image }}" class="card-img" style="height:auto">
         {% else %}
         <!-- <svg class="bd-placeholder-img" width="100%" height="100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dx="-2em" dy=".3em">No Image</text></svg> -->
         {% endif %}

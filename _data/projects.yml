@@ -1,28 +1,30 @@
-- name: Dataset representation language for reading heterogeneous datasets
+- name: Dataset Representation Language for Reading Heterogeneous Datasets
   image: /assets/homepage/projects/drepr-kcap19.png
   descriptions:
-    - Reading public datasets are a laborious task and frequently required to write custom code because they are often stored in many different formats (CSV, JSON, Spreadsheet, NetCDF, etc) with different layouts (row-based, matrix, hierarchy).
-    - To address the problem, we create a language to represent heterogeneous datasets and very efficient engine to read these datasets from their own formats to a common representation.
+    - Reading public datasets is a laborious task and frequently requires to write custom code because data are often stored in many different formats (CSV, JSON, Spreadsheet, NetCDF, etc) with different layouts (row-based, matrix, hierarchy).
+    - To address the problem, we create D-REPR, a language to represent heterogeneous datasets, and a very efficient D-REPR processor to read the datasets from their own formats to a common representation.
   links:
     - name: Paper
       url: /#drepr-kcap19
     - name: Github
       url: https://github.com/usc-isi-i2/d-repr
-- name: Learning semantic models of data sources using probabilistic graphical models
+- name: Learning Semantic Models of Data Sources Using Probabilistic Graphical Models
   image: /assets/homepage/projects/sm-www19.png
-  description: Learning semantic models that describes structured data sources using ontologies. Then, the semantic models are used to automatically publishing data to knowledge graphs.
+  descriptions:
+    - The problem is to automatically building semantic descriptions of data for publishing structured sources to knowledge graphs.
+    - We use beam search to generate possible candidate semantic models and a probabilistic graphical model as a scoring function to guide the search.
   links:
   - name: Paper
     url: /#sm-www19
   - name: Github
     url: https://github.com/binh-vu/semantic-modeling
-- name: From sketches to HTML/CSS code
+- name: From Sketches to HTML/CSS Code
   image: /assets/20190427-sketch2code/demo.gif
-  description: Using Deep Learning to synthesise HTML/CSS programs from mock-up UIs (Course Project)
+  description: Using Deep Learning to synthesize HTML/CSS programs from mock-up UIs (Course Project)
   links:
     - name: Blog Post
       url: /projects/csci-599/2019/04/27/from-sketches-to-html-css-code.html
     - name: Github
       url: https://github.com/binh-vu/sketch2code
-- name: Identifying potential company hardware/software vulnerabilities
-  description: Given a company, auto-crawling online sources to retrieve expertise of its employees, then predict the software and hardware used in the company. The list of vulnerabilities is obtained by linking the software and hardware to the CVE database.
+- name: Identifying Potential Company Hardware/Software Vulnerabilities
+  description: Auto-crawling online sources to retrieve expertise of employees of a company, then predicting the software and hardware used in the company. A list of vulnerabilities is obtained by linking the software and hardware to the CVE database.
