@@ -143,7 +143,7 @@ To train an agent to know which action to take, we use a Deep Q-network (DQN) to
 As the number of actions and the problem space is enormous (> 12 actions and ~12^105 possible settings), training a DQN takes a tremendous amount of time and resources. Within a limited time, we haven't successfully trained and made RL work. During the training time, we observed that the accumulated reward and the length of episodes increase over time, which indicates that DQN may have learned something useful (Figure 11). The further direction for this approach could be pre-trained DQN and then applying RL.
 
 <figure>
-	<img src="/assets/20190427-sketch2code/reinforcement-learning-stats.png" />
+	<img style="width: 90%" src="/assets/20190427-sketch2code/reinforcement-learning-stats.png" />
 	<figcaption>Figure 11. Accumulated reward (left picture) and length of episode (right image) increase over time</figcaption>
 </figure>
 

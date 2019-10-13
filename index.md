@@ -15,8 +15,10 @@ layout: default-container
 4676 Admiralty Way,
 Marina del Rey, CA, 90292 <br/>
         <b>Email</b>: <a href="mailto:binhlvu@usc.edu">binhlvu@usc.edu</a> or <a href="mailto:binhvu@isi.edu">binhvu@isi.edu</a> <br/>
+        <span style="line-height:1.3em; font-size: 1.3em">
         <a href="https://github.com/binh-vu"><i class="fab fa-github"></i></a>
         <a href="https://www.linkedin.com/in/binh-v-3828a16a/"><i class="fab fa-linkedin"></i></a>
+        </span>
     </p>
   </div>
 </div>
@@ -96,9 +98,3 @@ I am generally interested in machine learning, mainly focusing on techniques for
 2016
 - **Outstanding Honor Student Award**<br/>
 2011 - 2014, HCMC University of Technology
-
-<style>
-    h2 {
-        /* color: #007bff!important; */
-    }
-</style>
