@@ -27,7 +27,7 @@ Marina del Rey, CA, 90292 <br/>
 
 I am a Ph.D. student in Computer Science at [University of Southern California](https://usc.edu) (USC), advised by Prof. [Craig Knoblock](http://usc-isi-i2.github.io/knoblock/). Before joining USC in 2016, I earned my B.E. in Computer Science from [HCMC University of Technology](http://www.cse.hcmut.edu.vn/site/en/) (honor program) in 2015.
 
-I am generally interested in machine learning, mainly focusing on techniques for knowledge graph construction. My current research is about semantic modeling for automatically publishing structured data sources to knowledge graphs. More information is available on my [resumé](/assets/homepage/resume.pdf).
+I am generally interested in machine learning, mainly focusing on techniques for knowledge graph construction. My current research is about semantic modeling for automatically publishing structured data sources to knowledge graphs. More information is available on my [resume](/assets/homepage/resume.pdf).
 
 ### Projects
 
