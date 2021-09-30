@@ -1,12 +1,18 @@
-- id: sm-www19
-  title: Learning Semantic Models of Data Sources Using Probabilistic Graphical Models
-  url: https://www.dropbox.com/s/3pmtbm1p5xtzn9m/www-p1944-vu.pdf?dl=0
+- id: ijcai2021
+  title: "SPADE: A Semi-supervised Probabilistic Approach for Detecting Errors in Tables"
+  url: http://minhptx.github.io/files/ijcai2021.pdf
   authors_pre: ""
-  authors_pos: ", Craig Knoblock, and Jay Pujara"
-  published_in: In Proceeding WWW '19 The World Wide Web Conference, 2019
-- id: drepr-kcap19
-  title: "D-REPR: A Language for Describing and Mapping Diversely-Structured Data Sources to RDF"
-  url: https://www.dropbox.com/s/54kdwi2b3b3mqcq/kcap-19.pdf?dl=0
+  authors_pos: ", Craig A. Knoblock, Muhao Chen, Binh Vu, and Jay Pujara"
+  published_in: In The 30th International Joint Conference on Artificial Intelligence (IJCAI 2021)
+- id: bigdata2019
+  title: "Learning Data Transformations with Minimal User Effort"
+  url: http://minhptx.github.io/files/bigdata2019.pdf
   authors_pre: ""
-  authors_pos: ", Jay Pujara, and Craig Knoblock"
-  published_in: In Proceeding K-CAP '19 Proceedings of the Knowledge Capture Conference, 2019
+  authors_pos: ", Craig A. Knoblock, and Jay Pujara"
+  published_in: In 2019 IEEE International Conference on Big Data (IEEE BigData 2019)
+- id: iswc2016
+  title: "Semantic Labeling: A domain-independent approach"
+  url: http://minhptx.github.io/files/iswc2016.pdf
+  authors_pre: ""
+  authors_pos: ", Suresh Alse, Craig A Knoblock, and Pedro Szekely."
+  published_in: In The 15th International Semantic Web Conference (ISWC 2016)

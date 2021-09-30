@@ -14,10 +14,11 @@ layout: default-container
         University of Southern California <br/>
 4676 Admiralty Way,
 Marina del Rey, CA, 90292 <br/>
-        <b>Email</b>: <a href="mailto:binhlvu@usc.edu">binhlvu@usc.edu</a> or <a href="mailto:binhvu@isi.edu">binhvu@isi.edu</a> <br/>
+        <b>Email</b>: <a href="mailto:minhpham@usc.edu">minhpham@usc.edu</a> or <a href="mailto:minhpham@isi.edu">minhpham@isi.edu</a> <br/>
         <span style="line-height:1.3em; font-size: 1.3em">
-        <a href="https://github.com/binh-vu"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/binh-v-3828a16a/"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/minhptx"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/minh-pham-b1405/"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.researchgate.net/profile/Minh-Pham-16"><i class="fab fa-researchgate"></i></a>
         </span>
     </p>
   </div>
@@ -25,9 +26,10 @@ Marina del Rey, CA, 90292 <br/>
 
 ### Biography
 
-I am a Ph.D. student in Computer Science at [University of Southern California](https://usc.edu) (USC), advised by Prof. [Craig Knoblock](http://usc-isi-i2.github.io/knoblock/). Before joining USC in 2016, I earned my B.E. in Computer Science from [HCMC University of Technology](http://www.cse.hcmut.edu.vn/site/en/) (honor program) in 2015.
+Candidate in the Computer Science Department at University of Southern California (USC) in Los Angeles. I am working as a research assistant at the [Center of Knowledge Graphs](http://usc-isi-i2.github.io/home/), advised by Prof. [Craig Knoblock](http://usc-isi-i2.github.io/knoblock/). Before joining USC in 2015, I earned my B.E. in Computer Science from [HCMC University of Technology](http://www.cse.hcmut.edu.vn/site/en/) (honor program) in 2014.
 
-I am generally interested in machine learning, mainly focusing on techniques for knowledge graph construction. My current research is about semantic modeling for automatically publishing structured data sources to knowledge graphs. More information is available on my [resume](/assets/homepage/resume.pdf).
+My research focuses on machine learning and AI techniques to reduce human effort in data integration. Particularly, I have been working on unsupervised and semi-supervised approaches for error detection and fact verification. More information is available on my [resume](/assets/homepage/resume.pdf).
+
 
 ### Projects
 
@@ -82,19 +84,15 @@ I am generally interested in machine learning, mainly focusing on techniques for
 
 {% for paper in site.data.publications %}
 - <a id="{{ paper.id }}" name="{{ paper.id }}"></a>[**{{ paper.title }}**]({{ paper.url }})<br/>
-{{ paper.authors_pre }}**Binh Vu**{{ paper.authors_pos }}<br/>
+{{ paper.authors_pre }}**Minh Pham**{{ paper.authors_pos }}<br/>
 {{ paper.published_in }}
 {% endfor %}
 
 ### Awards
 
-- **National Science Foundation sponsored Student Travel Awards**<br/>
-2019, The 18th International Semantic Web Conference
-- **National Science Foundation sponsored Student Travel Awards**<br/>
-2017, The 16th International Semantic Web Conference
-- **ISI Distinguished Top-Off Fellowship**<br/>
-2016, USC - ISI
-- **Vietnam Education Foundation (VEF) Fellowship to pursue Ph.D. degree in the U.S**<br/>
-2016
-- **Outstanding Honor Student Award**<br/>
-2011 - 2014, HCMC University of Technology
+- **ISI Graduate Symposium**<br/>
+Best Paper Award, 2019
+- **Vietnam Education Foundation (VEF) Fellowship**<br/>
+Fellow, 2015
+- **HCMC University of Technology**<br/>
+Outstanding Honor Student Award, 2010 - 2014
