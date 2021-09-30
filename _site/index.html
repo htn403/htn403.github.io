@@ -53,7 +53,7 @@ Marina del Rey, CA, 90292 <br />
 
 <p>Candidate in the Computer Science Department at University of Southern California (USC) in Los Angeles. I am working as a research assistant at the <a href="http://usc-isi-i2.github.io/home/">Center of Knowledge Graphs</a>, advised by Prof. <a href="http://usc-isi-i2.github.io/knoblock/">Craig Knoblock</a>. Before joining USC in 2015, I earned my B.E. in Computer Science from <a href="http://www.cse.hcmut.edu.vn/site/en/">HCMC University of Technology</a> (honor program) in 2014.</p>
 
-<p>My research focuses on machine learning and AI techniques to reduce human effort in data integration. Particularly, I have been working on unsupervised and semi-supervised approaches for error detection and fact verification. More information is available on my <a href="/assets/homepage/resume.pdf">resume</a>.</p>
+<p>My research focuses on machine learning and AI techniques to reduce human effort in data integration. Particularly, I have been working on unsupervised and semi-supervised approaches for error detection and fact verification for tabular data. More information is available on my <a href="/assets/homepage/resume.pdf">resume</a>.</p>
 
 <h3 id="projects">Projects</h3>
 
@@ -86,7 +86,9 @@ Marina del Rey, CA, 90292 <br />
             
             <li>Errors in Web tables are difficult to detect and correct because of its unknownness, heterogeneity and rarity.</li>
             
-            <li>In this research, we proactively leverage human feedback using a neural-symbolic framework to increase the error detection performance. The framework uses Probabilistic Soft Logic (PSL) to infer the active learning examples and Deep Neural Networks to classify errors based on labeled examples.</li>
+            <li>In this research, we proactively leverage human feedback using a neural-symbolic framework to increase the error detection performance.</li>
+            
+            <li>The framework uses Probabilistic Soft Logic (PSL) to infer the active learning examples and Deep Neural Networks to classify errors based on labeled examples.</li>
             
             </ul>
         
@@ -116,9 +118,9 @@ Marina del Rey, CA, 90292 <br />
         
             <ul>
             
-            <li>Learning transformations to convert data between different formats is challenging since it normally requires extensive user effort to find and label examples in different formats.</li>
+            <li>Learning transformations to convert data between different formats is challenging since it normally requires extensive user effort to find and label examples in each format.</li>
             
-            <li>In this research, we proposed an unsupervised approach to transform data by leveraging hierarchical clustering to group string values into multiple format-like clusters and infer the transformations between clusters using semantic labeling techniques. (ISWC 2016 paper).</li>
+            <li>In this research, we proposed an unsupervised approach to transform data by leveraging hierarchical clustering to group string values into multiple format-like clusters and infer the transformations between clusters using semantic labeling techniques without any user labeling. (ISWC 2016 paper).</li>
             
             </ul>
         
@@ -148,9 +150,11 @@ Marina del Rey, CA, 90292 <br />
         
             <ul>
             
-            <li>The problem is to automatically build semantic descriptions of data for publishing structured sources to knowledge graphs.</li>
+            <li>The problem of source modeling is to automatically build semantic descriptions of data for publishing structured sources to knowledge graphs.</li>
             
-            <li>We use beam search to generate possible candidate semantic models and a probabilistic graphical model as a scoring function to guide the search.</li>
+            <li>Semantic labeling is an important step in source modeling where attributes in data sources are mapped with the corresponding properties in ontologies.</li>
+            
+            <li>We use generalized pairwise similarity measures to generate features and binary classification to predict the properties of each attribute.</li>
             
             </ul>
         

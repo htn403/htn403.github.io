@@ -2,7 +2,8 @@
   image: /assets/homepage/projects/ijcai2021.png
   descriptions:
     - Errors in Web tables are difficult to detect and correct because of its unknownness, heterogeneity and rarity.
-    - In this research, we proactively leverage human feedback using a neural-symbolic framework to increase the error detection performance. The framework uses Probabilistic Soft Logic (PSL) to infer the active learning examples and Deep Neural Networks to classify errors based on labeled examples.
+    - In this research, we proactively leverage human feedback using a neural-symbolic framework to increase the error detection performance. 
+    - The framework uses Probabilistic Soft Logic (PSL) to infer the active learning examples and Deep Neural Networks to classify errors based on labeled examples.
   links:
     - name: Paper
       url: /#ijcai2021
@@ -11,8 +12,8 @@
 - name: "Learning Data Transformation with Minimal User Effort"
   image: /assets/homepage/projects/bigdata2019.png
   descriptions:
-    - Learning transformations to convert data between different formats is challenging since it normally requires extensive user effort to find and label examples in different formats.
-    - In this research, we proposed an unsupervised approach to transform data by leveraging hierarchical clustering to group string values into multiple format-like clusters and infer the transformations between clusters using semantic labeling techniques. (ISWC 2016 paper).
+    - Learning transformations to convert data between different formats is challenging since it normally requires extensive user effort to find and label examples in each format.
+    - In this research, we proposed an unsupervised approach to transform data by leveraging hierarchical clustering to group string values into multiple format-like clusters and infer the transformations between clusters using semantic labeling techniques without any user labeling. (ISWC 2016 paper).
   links:
     - name: Paper
       url: /#bigdata2019
@@ -21,8 +22,9 @@
 - name: Domain-independent Semantic Labeling
   image: /assets/homepage/projects/iswc2016.png
   descriptions:
-    - The problem is to automatically build semantic descriptions of data for publishing structured sources to knowledge graphs.
-    - We use beam search to generate possible candidate semantic models and a probabilistic graphical model as a scoring function to guide the search.
+    - The problem of source modeling is to automatically build semantic descriptions of data for publishing structured sources to knowledge graphs. 
+    - Semantic labeling is an important step in source modeling where attributes in data sources are mapped with the corresponding properties in ontologies.
+    - We use generalized pairwise similarity measures to generate features and binary classification to predict the properties of each attribute.
   links:
   - name: Paper
     url: /#iswc2016
