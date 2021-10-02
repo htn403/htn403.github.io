@@ -8,7 +8,7 @@ layout: default-container
   </div>
   <div class="col-md">
     <p>
-        <b>Ph.D. student</b> <br/>
+        <b>Ph.D. Candidate</b> <br/>
         Office ISI 1038 <br />
         Information Sciences Institute (ISI),
         University of Southern California <br/>
