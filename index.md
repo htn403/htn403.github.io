@@ -26,7 +26,7 @@ Marina del Rey, CA, 90292 <br/>
 
 ### Biography
 
-Candidate in the Computer Science Department at University of Southern California (USC) in Los Angeles. I am working as a research assistant at the [Center of Knowledge Graphs](http://usc-isi-i2.github.io/home/), advised by Prof. [Craig Knoblock](http://usc-isi-i2.github.io/knoblock/). Before joining USC in 2015, I earned my B.E. in Computer Science from [HCMC University of Technology](http://www.cse.hcmut.edu.vn/site/en/) (honor program) in 2014.
+I am a Ph.D. Candidate in the Computer Science Department at University of Southern California (USC) in Los Angeles. I am working as a research assistant at the [Center of Knowledge Graphs](http://usc-isi-i2.github.io/home/), advised by Prof. [Craig Knoblock](http://usc-isi-i2.github.io/knoblock/). Before joining USC in 2015, I earned my B.E. in Computer Science from [HCMC University of Technology](http://www.cse.hcmut.edu.vn/site/en/) (honor program) in 2014.
 
 My research focuses on machine learning and AI techniques to reduce human effort in data integration. Particularly, I have been working on unsupervised and semi-supervised approaches for error detection and fact verification for tabular data. More information is available on my [resume](/assets/homepage/resume.pdf).
 
