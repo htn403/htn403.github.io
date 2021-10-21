@@ -1,18 +1,18 @@
 - id: ijcai2021
   title: "SPADE: A Semi-supervised Probabilistic Approach for Detecting Errors in Tables"
-  url: http://minhptx.github.io/files/ijcai2021.pdf
+  url: /assets/homepage/ijcai2021.pdf
   authors_pre: ""
   authors_pos: ", Craig A. Knoblock, Muhao Chen, Binh Vu, and Jay Pujara"
   published_in: In The 30th International Joint Conference on Artificial Intelligence (IJCAI 2021)
 - id: bigdata2019
   title: "Learning Data Transformations with Minimal User Effort"
-  url: http://minhptx.github.io/files/bigdata2019.pdf
+  url: /assets/homepage/bigdata2019.pdf
   authors_pre: ""
   authors_pos: ", Craig A. Knoblock, and Jay Pujara"
   published_in: In 2019 IEEE International Conference on Big Data (IEEE BigData 2019)
 - id: iswc2016
   title: "Semantic Labeling: A domain-independent approach"
-  url: http://minhptx.github.io/files/iswc2016.pdf
+  url: /assets/homepage/iswc2016.pdf
   authors_pre: ""
   authors_pos: ", Suresh Alse, Craig A Knoblock, and Pedro Szekely."
   published_in: In The 15th International Semantic Web Conference (ISWC 2016)
