@@ -1,2 +1,2 @@
-# Welcome to my website project
-personal website with template forked from minhptx.github.io
+# Welcome to my website htn403.github.io
+personal website, where you can find codes for the projects I authored (upon the agreements with my coauthors)
