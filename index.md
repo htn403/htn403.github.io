@@ -8,13 +8,12 @@ layout: default-container
   </div>
   <div class="col-md">
     <p>
-        <b>Ph.D. Candidate</b> <br/>
-        Office ISI 1038 <br />
-        Information Sciences Institute (ISI),
-        University of Southern California <br/>
-4676 Admiralty Way,
-Marina del Rey, CA, 90292 <br/>
-        <b>Email</b>: <a href="mailto:minhpham@usc.edu">minhpham@usc.edu</a> or <a href="mailto:minhpham@isi.edu">minhpham@isi.edu</a> <br/>
+        <b>MSc, PhD</b> <br/>
+        Postdoctoral Researcher <br />
+        Current affiliation: School of Engineering,
+        Brown University <br/>
+184 Hope St, Providence, RI 02912 <br/>
+        <b>Email</b>: <a href="mailto:nguyen.thaihoang@gmail.com">nguyen.thaihoang@gmail.com</a><br/>
         <span style="line-height:1.3em; font-size: 1.3em">
         <a href="https://github.com/minhptx"><i class="fab fa-github"></i></a>
         <a href="https://www.linkedin.com/in/minh-pham-b1405/"><i class="fab fa-linkedin"></i></a>
