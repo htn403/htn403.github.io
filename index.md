@@ -4,7 +4,7 @@ layout: default-container
 
 <div class="row mb-3">
   <div class="col-md-3">
-    <img src="/assets/homepage/profile.jpg" class="rounded float-left img-fluid" style="border: #ddd solid 1px" />
+    <img src="/assets/homepage/profile.png" class="rounded float-left img-fluid" style="border: #ddd solid 1px" />
   </div>
   <div class="col-md">
     <p>
